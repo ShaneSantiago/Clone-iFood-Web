@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+# Projeto em faze de finalização. Faltam algumas coisas para conclusão
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+<!-- PROJECT TITLE -->
+<h1 align='center'id="top"> :rocket: == Projeto Final de Front-End == :rocket: </h1>
 
-In the project directory, you can run:
 
-### `npm start`
+<!-- PROJECT SOBRE -->
+<h2 id="sobre">:notebook: Sobre </h2>
+<p align="justify">Projeto final de Frontend desenvolvido em React JS pelos alunos do curso Fullstack Web (integral) da Labenu, Turma Maryam, grupo 2. No projeto desenvolvemos uma aplicação web baseada em um aplicativo de delivery de comida onde o design foi desenvolvido pela designer Camila Mizutani e utilizamos uma API própria contendo todas as funções necessárias.</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<!-- PROJECT SITE -->
+<h2 id="site">:earth_americas: Link do site </h2>
+<p>🔗 <a href="https://lewd-foot.surge.sh/" target="_blank"> Future Eats </a>  </p>
+<!-- <a href="https://dizzy-future-eats.surge.sh/" onclick="return ! window.open(this.href);"> Open in a new window</a> -->
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<!-- PROJECT TECHNOLOGIES -->
+<h2 id="tecnologias"> 🛠 Tecnologias </h2>
 
-### `npm run build`
+Abaixo segue o que foi utilizado na criação deste projeto:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<p>🔗 <a href="https://pt-br.reactjs.org/" target="_blank"> ReactJS </a> - O ReactJS é uma biblioteca JavaScript declarativa, eficiente e flexível para criar interfaces com o usuário. Ele permite compor UIs complexas a partir de pequenos e isolados códigos chamados “componentes”. </p>
+<p>🔗 <a href="https://styled-components.com/" target="_blank"> Styled-Components <a/> - Styled-components é uma biblioteca para React e React Native que permite que você use estilos ao nível de componente na sua aplicação. Eles são escritos em uma mistura de JavaScript com CSS.</p>
+<p>🔗 <a href="https://mui.com/pt/" target="_blank"> Material-UI </a> - O Material-UI fornece um componente opcional CssBaseline. Ele corrige algumas inconsistências nos navegadores e dispositivos, ao mesmo tempo em que fornece redefinições ligeiramente mais opinativas para elementos HTML comuns.</p>
+<p>🔗 <a href="https://www.npmjs.com/package/axios" target="_blank"> React Axios </a> - Axios é um cliente HTTP baseado em Promises para fazer requisições. Pode ser utilizado tanto no navegador quanto no Node. js ou qualquer serviço de API.</p>
+<p>🔗 <a href="https://reactrouter.com/web/guides/quick-start" target="_blank"> React-router-dom </a> - O React Router é uma lib completa para controle de rotas que permite que você consiga configurar as rotas utilizando o formato JSX e também disponibiliza uma API para você configurar diretamente via Javascript.</p>
+<p>🔗 <a href="https://pt-br.reactjs.org/docs/hooks-intro.html" target="_blank"> React Hooks </a> - Eles permitem que você use o state e outros recursos do React sem escrever uma classe.
+<p>🔗 <a href="https://www.redhat.com/pt-br/topics/api/what-are-application-programming-interfaces" target="_blank"> API </a> - API é um conjunto de definições e protocolos usado no desenvolvimento e na integração de software de aplicações. API é um acrônimo em inglês que significa interface de programação de aplicações.</p>
+<p>🔗 <a href="https://www.totvs.com/blog/negocios/kanban/" target="_blank"> Metodologias Ágeis - Kanban </a> -Kanban é um sistema visual de gestão de trabalho, que busca conduzir cada tarefa por um fluxo predefinido de trabalho.</p>
+<!-- <p>🔗 <a href="https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-PortugueseBR-2.0.pdf" target="_blank"> Metodologias Ágeis - Scrum </a> - Scrum é um framework leve que ajuda pessoas, times e organizações a gerar valor através de soluções adaptativas para problemas complexos.</p> -->
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<!-- PROJECT IT WORKS-->
+<h2 id="funciona">:heavy_check_mark: O que funciona</h2>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Telas
+- [x] Tela inicial;
+- [x] Login;
+- [x] Cadastro de endereço;
+- [x] Sign up;
+- [x] Home page;
+- [x] Pesquisa;
+- [x] Carrinho;
+- [x] Restaurantes;
+- [x] Pedido em andamento;
+- [x] Perfil;
+- [x] Editar perfil;
+- [x] Editar endereço.
 
-### `npm run eject`
+### Integração com API
+- [x] Login;
+- [x] Signup;
+- [x] Add Address;
+- [x] Get Full Address;
+- [x] Get Profile;
+- [x] Update Profile;
+- [x] Get Restaurants;
+- [x] Get Restaurant Detail;
+- [x] Place Order;
+- [x] Get Active Order;
+- [x] Orders History.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<!-- PROJECT PENDING-->
+<h2 id="pendente">:construction: Em desenvolvimento</h2>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Versão Desktop
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
