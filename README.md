@@ -1,4 +1,4 @@
-# Projeto em faze de finalização. Faltam algumas coisas para conclusão
+# Projeto em fase de finalização. Faltam algumas coisas para conclusão
 
 
 <!-- PROJECT TITLE -->
