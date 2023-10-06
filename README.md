@@ -12,8 +12,8 @@
 
 <!-- PROJECT SITE -->
 <h2 id="site">:earth_americas: Link do site </h2>
-<p>🔗 <a href="https://first-frog.surge.sh/" target="_blank"> Future Eats </a>  </p>
-<!-- <a href="https://dizzy-future-eats.surge.sh/" onclick="return ! window.open(this.href);"> Open in a new window</a> -->
+<p>🔗 <a href="https://nice-voice.surge.sh/" target="_blank"> Future Eats </a>  </p>
+<!-- <a href="https://nice-voice.surge.sh/" onclick="return ! window.open(this.href);"> Open in a new window</a> -->
 
 
 <!-- PROJECT TECHNOLOGIES -->
