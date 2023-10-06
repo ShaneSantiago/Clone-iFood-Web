@@ -18,8 +18,10 @@ import { useResults } from "../../Components/Context/GlobalContext";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../../Constants/url";
+import UseProtectedPage from "../../Components/Hooks/useProtectedPage";
 
 const Cart = () => {
+  UseProtectedPage();
   const { cart, setCart } = useResults();
   const [checkBox, setCheckBox] = useState(false);
   const [checkBoxCredit, setCheckBoxCredit] = useState(false);
@@ -190,6 +192,7 @@ const Cart = () => {
                 <Image
                   src={item.photoUrl}
                   alt="produtos"
+                  w="350px"
                   h="200px"
                   border="1px solid #CCC"
                   mb="10px"

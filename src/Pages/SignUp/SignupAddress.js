@@ -13,6 +13,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { BASE_URL } from "../../Constants/url";
 import future from "../../assets/future.png";
+import { useNavigate } from "react-router-dom";
+import UnProtectedPage from "../../Components/Hooks/useUnprotectedPage";
 
 const SignUpAddress = () => {
   const [street, setStreet] = useState("");
@@ -22,6 +24,8 @@ const SignUpAddress = () => {
   const [state, setState] = useState("");
   const [complement, setComplement] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const toast = useToast();
 
@@ -55,6 +59,7 @@ const SignUpAddress = () => {
           isClosable: true,
         });
         setLoading(false);
+        navigate("/feed");
       })
       .catch((erro) => {
         console.log("Erro", erro.response.data);

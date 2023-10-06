@@ -15,8 +15,10 @@ import React, { useState } from "react";
 import { BASE_URL } from "../../Constants/url";
 import future from "../../assets/future.png";
 import { useNavigate } from "react-router-dom";
+import UnProtectedPage from "../../Components/Hooks/useUnprotectedPage";
 
 const Login = () => {
+  UnProtectedPage();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -72,6 +74,7 @@ const Login = () => {
           display="flex"
           justifyContent="center"
           flexDirection="column"
+          m="20px"
         >
           <Box margin="0 auto" w="100%" maxW="370px" mt="20px">
             <Text textAlign="center" fontSize="40px" mb="50px">
@@ -119,9 +122,11 @@ const Login = () => {
             >
               Entrar
             </Button>
-            <Link mt="10px" onClick={() => navigate("/cadastro")}>
-              Não tem cadastro? Cadastre-se agora
-            </Link>
+            <Box mt="20px">
+              <Link onClick={() => navigate("/cadastro")}>
+                Não tem cadastro? Cadastre-se agora
+              </Link>
+            </Box>
           </Box>
         </Box>
 

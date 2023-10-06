@@ -14,6 +14,7 @@ import React, { useState } from "react";
 import { BASE_URL } from "../../Constants/url";
 import future from "../../assets/future.png";
 import { useNavigate } from "react-router-dom";
+import UnProtectedPage from "../../Components/Hooks/useUnprotectedPage";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -68,6 +69,14 @@ const SignUp = () => {
         setLoading(false);
       });
   };
+
+  const handleChange = (e) => {
+    const newCpf = e.target.value.replace(/\D/g, "");
+
+    if (newCpf.length <= 11) {
+      setCpf(newCpf);
+    }
+  };
   return (
     <>
       <Flex height="100vh">
@@ -86,6 +95,7 @@ const SignUp = () => {
           display="flex"
           justifyContent="center"
           flexDirection="column"
+          mb="30px"
         >
           <Box margin="0 auto" w="100%" maxW="370px" mt="20px">
             <Text textAlign="center" fontSize="40px" mb="50px">
@@ -128,9 +138,9 @@ const SignUp = () => {
                 w="100%"
                 maxW="370px"
                 type="number"
-                placeholder="Digite seu CPF"
+                placeholder="Digite seu CPF sem traços ou pontos"
                 value={cpf}
-                onChange={(e) => setCpf(e.target.value)}
+                onChange={handleChange}
               />
             </FormControl>
 

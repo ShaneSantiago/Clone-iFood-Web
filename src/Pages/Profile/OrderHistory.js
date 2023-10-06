@@ -17,7 +17,7 @@ const OrderHistory = () => {
     axios
       .get(`${BASE_URL}/orders/history`, config)
       .then((res) => {
-        console.log("Sucesso", res.data.orders);
+        console.log("Sucesso1", res.data.orders);
         setHistory(res.data.orders);
       })
       .catch((erro) => {
@@ -25,7 +25,6 @@ const OrderHistory = () => {
       });
   };
 
-  // Função para formatar uma data em "Dia Mês Ano"
   const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
 

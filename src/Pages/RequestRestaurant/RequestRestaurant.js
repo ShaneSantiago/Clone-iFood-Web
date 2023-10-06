@@ -13,6 +13,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Select,
+  Spinner,
   Text,
   useDisclosure,
   useToast,
@@ -23,8 +24,10 @@ import { useParams } from "react-router-dom";
 import { BASE_URL } from "../../Constants/url";
 import { SearchIcon } from "@chakra-ui/icons";
 import { useResults } from "../../Components/Context/GlobalContext";
+import UseProtectedPage from "../../Components/Hooks/useProtectedPage";
 
 const RequestRestaurant = () => {
+  UseProtectedPage();
   const [restaurant, setRestaurant] = useState([]);
   const [filter, setFilter] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
@@ -95,6 +98,7 @@ const RequestRestaurant = () => {
       });
   };
 
+  console.log("teste", restaurant);
   return (
     <>
       <Box>
@@ -130,28 +134,47 @@ const RequestRestaurant = () => {
             </Box>
           </Flex>
         </Box>
-        <Box w={{ base: "100%", lg: "70%" }} mb="20px" px="10px" m="0 auto">
-          <Card w="100%">
-            {" "}
-            {/* <Image src={restaurant.logoUrl} alt="restaurantes" h="200px" /> */}
-            <Box
-              mt="10px"
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              m="20px"
-            >
-              <Text fontSize="30px" color="#5CB646">
-                {restaurant.name}
-              </Text>
-              <Text>Tempo de entrega: {restaurant.deliveryTime} Min</Text>
-              <Text>
-                Valor entrega: R${" "}
-                {Number(restaurant.shipping).toFixed(2).replace(".", ",")}
-              </Text>
+        {restaurant.length === 0 ? (
+          <Box
+            w="100%"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+            />
+          </Box>
+        ) : (
+          <>
+            <Box w={{ base: "100%", lg: "70%" }} mb="20px" px="10px" m="0 auto">
+              <Card w="100%">
+                {" "}
+                {/* <Image src={restaurant.logoUrl} alt="restaurantes" h="200px" /> */}
+                <Box
+                  mt="10px"
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  m="20px"
+                >
+                  <Text fontSize="30px" color="#5CB646">
+                    {restaurant.name}
+                  </Text>
+                  <Text>Tempo de entrega: {restaurant.deliveryTime} Min</Text>
+                  <Text>
+                    Valor entrega: R${" "}
+                    {Number(restaurant.shipping).toFixed(2).replace(".", ",")}
+                  </Text>
+                </Box>
+              </Card>
             </Box>
-          </Card>
-        </Box>
+          </>
+        )}
       </Box>
       <Card display="flex" w="100%" flexWrap="wrap">
         <Box
@@ -173,7 +196,7 @@ const RequestRestaurant = () => {
                   src={item.photoUrl}
                   alt="produtos"
                   w="350px"
-                  h="150px"
+                  h="200px"
                   border="1px solid #CCC"
                   mb="10px"
                 />

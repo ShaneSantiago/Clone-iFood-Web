@@ -38,12 +38,19 @@ const Header = () => {
     };
   }, []);
 
+  const confirmLogin = localStorage.getItem("token");
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
   return (
     <Flex
       as="header"
       alignItems="center"
       justifyContent="space-between"
-      bg="blue.500"
+      bg="#5CB646"
       p={4}
       color="white"
     >
@@ -89,6 +96,21 @@ const Header = () => {
             onClick={(e) => navigate("/perfil")}
           >
             Perfil
+            {}
+          </Button>
+
+          <Button
+            variant="outline"
+            color="white"
+            border="none"
+            _hover={{ bg: "#CCC" }}
+            mr={4}
+            onClick={(e) => {
+              logout();
+              onClose();
+            }}
+          >
+            {confirmLogin ? "Logout" : "Login"}
           </Button>
         </Flex>
       )}
@@ -127,11 +149,22 @@ const Header = () => {
                 paddingTop="10px"
                 mb={4}
                 onClick={(e) => {
-                  navigate("/perfil");
+                  navigate("/");
                   onClose();
                 }}
               >
                 Perfil
+              </Text>
+
+              <Text
+                paddingTop="10px"
+                mb={4}
+                onClick={(e) => {
+                  logout();
+                  onClose();
+                }}
+              >
+                {confirmLogin ? "Logout" : "Login"}
               </Text>
             </Flex>
           </DrawerBody>

@@ -9,8 +9,10 @@ import {
 } from "../../Components/Context/GlobalContext";
 import FilterButton from "./FilterButton";
 import { useNavigate } from "react-router-dom";
+import UseProtectedPage from "../../Components/Hooks/useProtectedPage";
 
 const Feedpage = () => {
+  UseProtectedPage();
   const { allRestaurantes, setAllRestaurants } = useResults();
   const [filter, setFilter] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);

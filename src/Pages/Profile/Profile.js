@@ -14,8 +14,10 @@ import { EditIcon } from "@chakra-ui/icons";
 import EditAddress from "./EditAddress";
 import EditUser from "./EditUser";
 import OrderHistory from "./OrderHistory";
+import UseProtectedPage from "../../Components/Hooks/useProtectedPage";
 
 const Profile = () => {
+  UseProtectedPage();
   const [user, setUser] = useState([]);
   const [fullAddress, setFullAddress] = useState([]);
   const [name, setName] = useState(user.name);
