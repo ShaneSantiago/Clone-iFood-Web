@@ -6,6 +6,7 @@ import {
   FormLabel,
   Image,
   Input,
+  Link,
   Text,
   useToast,
 } from "@chakra-ui/react";
@@ -170,6 +171,11 @@ const SignUp = () => {
             >
               Cadastrar
             </Button>
+            <Box mt="20px">
+              <Link onClick={() => navigate("/")}>
+                Já possui cadastro? Faça Login
+              </Link>
+            </Box>
           </Box>
         </Box>
       </Flex>

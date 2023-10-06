@@ -15,10 +15,12 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
+import { useResults } from "../Context/GlobalContext";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isMobile, setIsMobile] = useState(false);
+  const { token, setToken } = useResults();
 
   const navigate = useNavigate();
 
@@ -43,6 +45,7 @@ const Header = () => {
   const logout = () => {
     localStorage.removeItem("token");
     navigate("/");
+    setToken(localStorage.removeItem("token"));
   };
 
   return (
@@ -149,7 +152,7 @@ const Header = () => {
                 paddingTop="10px"
                 mb={4}
                 onClick={(e) => {
-                  navigate("/");
+                  navigate("/perfil");
                   onClose();
                 }}
               >

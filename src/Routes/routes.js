@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "../Pages/LoginPage/Login";
 import SignUp from "../Pages/SignUp/Signup";
@@ -8,12 +8,15 @@ import RequestRestaurant from "../Pages/RequestRestaurant/RequestRestaurant";
 import Cart from "../Pages/Cart/Cart";
 import Header from "../Components/Header/Header";
 import Profile from "../Pages/Profile/Profile";
+import { useResults } from "../Components/Context/GlobalContext";
 
 const Routers = () => {
+  const { token } = useResults();
+
   return (
     <>
       <Router>
-        <Header />
+        {token ? <Header /> : null}
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/cadastro" element={<SignUp />} />

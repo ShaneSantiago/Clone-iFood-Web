@@ -63,7 +63,7 @@ const Cart = () => {
     });
     setCart(updatedCart);
   };
-  console.log("check");
+
   const submitOrder = () => {
     if (checkBox === false && checkBoxCredit === false) {
       toast({
@@ -80,56 +80,59 @@ const Cart = () => {
   };
 
   const order = () => {
-    const restaurantId = cart.map((item) => {
-      return item.idRestaurant;
-    });
-    const products = cart.map((item) => ({
-      id: item.id,
-      quantity: item.quantity,
-    }));
+    const restaurantIds = [...new Set(cart.map((item) => item.idRestaurant))];
 
-    const body = {
-      products: products,
-      paymentMethod: payment,
-    };
+    restaurantIds.forEach((restaurantId) => {
+      const products = cart
+        .filter((item) => item.idRestaurant === restaurantId)
+        .map((item) => ({
+          id: item.id,
+          quantity: item.quantity,
+        }));
 
-    const headers = {
-      headers: {
-        auth: localStorage.getItem("token"),
-        "Content-Type": "application/json",
-      },
-    };
-    axios
-      .post(`${BASE_URL}/restaurants/${restaurantId}/order`, body, headers)
-      .then((res) => {
-        toast({
-          title: "Sucesso",
-          description: "Seu pedido foi realizado com sucesso",
-          status: "success",
-          duration: 9000,
-          isClosable: true,
+      const body = {
+        products: products,
+        paymentMethod: payment,
+      };
+
+      const headers = {
+        headers: {
+          auth: localStorage.getItem("token"),
+          "Content-Type": "application/json",
+        },
+      };
+
+      axios
+        .post(`${BASE_URL}/restaurants/${restaurantId}/order`, body, headers)
+        .then((res) => {
+          toast({
+            title: "Sucesso",
+            description: "Seu pedido foi realizado com sucesso",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 409) {
+            toast({
+              title: "Ops",
+              description: "Já existe um pedido em andamento",
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
+          } else {
+            toast({
+              title: "Ops",
+              description: "Ocorreu algum erro",
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
+          }
         });
-      })
-      .catch((erro) => {
-        console.log("erro", erro);
-        if (erro.response.status === 409) {
-          toast({
-            title: "Ops",
-            description: "Já existe um pedido em andamento",
-            status: "error",
-            duration: 9000,
-            isClosable: true,
-          });
-        } else {
-          toast({
-            title: "Ops",
-            description: "Ocorreu algum erro",
-            status: "error",
-            duration: 9000,
-            isClosable: true,
-          });
-        }
-      });
+    });
   };
 
   useEffect(() => {
@@ -144,7 +147,7 @@ const Cart = () => {
       .get(`${BASE_URL}/active-order`, headers)
       .then((res) => {
         setOrderErro(res.data);
-        console.log("Sucesso", res.data);
+        // console.log("Sucesso", res.data);
         setLoading(false);
       })
       .catch((erro) => {
@@ -168,7 +171,6 @@ const Cart = () => {
     }
   }
 
-  console.log("teste", orderErro.order);
   return (
     <>
       <Box padding="20px">

@@ -16,12 +16,14 @@ import { BASE_URL } from "../../Constants/url";
 import future from "../../assets/future.png";
 import { useNavigate } from "react-router-dom";
 import UnProtectedPage from "../../Components/Hooks/useUnprotectedPage";
+import { useResults } from "../../Components/Context/GlobalContext";
 
 const Login = () => {
   UnProtectedPage();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const { token, setToken } = useResults();
 
   const toast = useToast();
 
@@ -50,6 +52,7 @@ const Login = () => {
           isClosable: true,
         });
         navigate("/feed");
+        setToken(localStorage.getItem("token"));
         setLoading(false);
       })
       .catch((erro) => {
@@ -130,7 +133,7 @@ const Login = () => {
           </Box>
         </Box>
 
-        <Box flex="1" bg="red" display={{ base: "none", lg: "block" }}>
+        <Box flex="1" display={{ base: "none", lg: "block" }}>
           <Image
             src={future}
             alt="Imagem"

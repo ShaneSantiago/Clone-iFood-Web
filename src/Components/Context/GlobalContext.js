@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import propTypes from "prop-types";
 
 const Results = createContext();
@@ -11,15 +11,16 @@ export function ResultsProvider({ children }) {
   const [allRestaurantes, setAllRestaurants] = useState([]);
   const [items, setItems] = useState([]);
   const [cart, setCart] = useState([]);
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
-  const restaurants = () => {
-    // Sua lógica para buscar e atualizar os restaurantes aqui
-  };
+  const restaurants = () => {};
 
   return (
     <Results.Provider
       value={{
         allRestaurantes,
+        token,
+        setToken,
         setAllRestaurants,
         restaurants,
         cart,
