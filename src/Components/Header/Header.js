@@ -56,8 +56,8 @@ const Header = () => {
       background="linear-gradient(to right, red, #ff8c00)"
       p={4}
       color="white"
-      position="fixed" // Torna o header fixo
-      width="100%" // Faz o cabeçalho ocupar toda a largura da tela
+      position="fixed"
+      width="100%"
       zIndex="999"
     >
       <Box>

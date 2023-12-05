@@ -56,7 +56,6 @@ const SignUp = () => {
       return;
     }
 
-    // Validação do CPF (neste exemplo, apenas verifica se tem 11 dígitos)
     if (cpf.length !== 11) {
       toast({
         title: "Erro",

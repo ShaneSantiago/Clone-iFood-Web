@@ -51,7 +51,6 @@ const Cart = () => {
     setCart(updatedCart);
   };
 
-  // Decrease quantity of an item
   const decrementQuantity = (itemId) => {
     const updatedCart = cart.map((item) =>
       item.id === itemId && item.quantity > 0
@@ -61,7 +60,6 @@ const Cart = () => {
     setCart(updatedCart);
   };
 
-  // Handle order submission
   const submitOrder = () => {
     if (!checkBox && !checkBoxCredit) {
       toast({
@@ -77,7 +75,6 @@ const Cart = () => {
     }
   };
 
-  // Send order request
   const order = () => {
     const restaurantIds = [...new Set(cart.map((item) => item.idRestaurant))];
 
@@ -136,7 +133,6 @@ const Cart = () => {
     });
   };
 
-  // Fetch active order on component mount
   useEffect(() => {
     setLoading(true);
     const headers = {
@@ -157,7 +153,6 @@ const Cart = () => {
       });
   }, []);
 
-  // Format order creation and expiration dates
   let createdAtFormatted = "";
   let expiresAtFormatted = "";
 
@@ -173,9 +168,6 @@ const Cart = () => {
       expiresAtFormatted = expiresAtDate.toLocaleString();
     }
   }
-
-  console.log("Dinheiro", checkBox);
-  console.log("Credito", checkBoxCredit);
 
   return (
     <>
@@ -291,7 +283,6 @@ const Cart = () => {
             ))}
           </Box>
 
-          {/* Order Summary Section */}
           <Box
             w={{ base: "100%", lg: "30%" }}
             h="100%"
@@ -303,7 +294,6 @@ const Cart = () => {
               Pagamento
             </Text>
 
-            {/* Cart Summary */}
             {cart.length < 1 ? (
               <Text>Nenhum produto foi adicionado</Text>
             ) : (
@@ -320,7 +310,6 @@ const Cart = () => {
               </>
             )}
 
-            {/* Payment Options */}
             <Box mt="20px">
               <Text fontWeight="500" color="white">
                 Forma de pagamento
@@ -346,7 +335,6 @@ const Cart = () => {
               </FormLabel>
             </Box>
 
-            {/* Submit Order Button */}
             <Box w="100%" mt="20px">
               <Button onClick={submitOrder} w="100%" bg="#5CB646" color="white">
                 Confirmar

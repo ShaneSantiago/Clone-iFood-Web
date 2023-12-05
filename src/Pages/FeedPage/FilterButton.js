@@ -32,7 +32,7 @@ const FilterButton = () => {
       <Box display="flex" flexWrap="wrap" w="100%" justifyContent="center">
         {allRestaurantes
           .filter((restaurant) => {
-            if (!selectedCategory) return true; // Se nenhum filtro estiver selecionado, mostre todos.
+            if (!selectedCategory) return true;
             return restaurant.category === selectedCategory;
           })
           .map((item) => {

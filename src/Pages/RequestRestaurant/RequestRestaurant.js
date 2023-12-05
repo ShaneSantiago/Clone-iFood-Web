@@ -232,8 +232,8 @@ const RequestRestaurant = () => {
                   border="1px solid #fff"
                   bg="transparent"
                   borderRadius="20px"
-                  overflow="hidden" // Para garantir que a sombra não ultrapasse os limites do card
-                  boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)" // Adiciona uma sombra sutil
+                  overflow="hidden"
+                  boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)"
                   transition="transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out"
                   _hover={{
                     transform: "scale(1.05)",
