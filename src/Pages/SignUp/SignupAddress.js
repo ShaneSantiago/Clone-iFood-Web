@@ -31,6 +31,17 @@ const SignUpAddress = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    if (!street || !number || !neighbourhood || !city || !state) {
+      toast({
+        title: "Erro",
+        description: "Preencha todos os campos obrigatórios.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
     signupAddress();
   };
 
@@ -76,7 +87,7 @@ const SignUpAddress = () => {
   };
   return (
     <>
-      <Flex height="100vh">
+      <Flex height="100vh" background="linear-gradient(to right, red, #ff8c00)">
         <Box flex="1" bg="red" display={{ base: "none", lg: "block" }}>
           <Image
             src={future}
@@ -94,19 +105,22 @@ const SignUpAddress = () => {
           flexDirection="column"
         >
           <Box margin="0 auto" w="100%" maxW="370px" mt="20px">
-            <Text textAlign="center" fontSize="40px" mb="30px">
+            <Text textAlign="center" fontSize="40px" mb="30px" color="white">
               Future{" "}
               <Text as="span" fontWeight="bold" color="#5CB646">
                 Eats
               </Text>
             </Text>
-            <Text mb="20px">Cadastre seu Endereço</Text>
+            <Text mb="20px" color="white">
+              Cadastre seu Endereço
+            </Text>
             <FormControl mt="10px">
-              <FormLabel>Rua</FormLabel>
+              <FormLabel color="white">Rua</FormLabel>
               <Input
                 padding="10px"
                 maxW="370px"
                 type="text"
+                bg="white"
                 placeholder="Digite sua rua"
                 border="none"
                 value={street}
@@ -115,11 +129,12 @@ const SignUpAddress = () => {
             </FormControl>
 
             <FormControl mt="10px">
-              <FormLabel>Número</FormLabel>
+              <FormLabel color="white">Número</FormLabel>
               <Input
                 padding="10px"
                 w="100%"
                 maxW="370px"
+                bg="white"
                 type="number"
                 placeholder="Número da residência"
                 value={number}
@@ -128,11 +143,12 @@ const SignUpAddress = () => {
             </FormControl>
 
             <FormControl mt="10px">
-              <FormLabel>Bairro</FormLabel>
+              <FormLabel color="white">Bairro</FormLabel>
               <Input
                 padding="10px"
                 w="100%"
                 maxW="370px"
+                bg="white"
                 type="text"
                 placeholder="Seu bairro"
                 value={neighbourhood}
@@ -141,10 +157,11 @@ const SignUpAddress = () => {
             </FormControl>
 
             <FormControl mt="10px">
-              <FormLabel>Cidade</FormLabel>
+              <FormLabel color="white">Cidade</FormLabel>
               <Input
                 padding="10px"
                 w="100%"
+                bg="white"
                 maxW="370px"
                 type="name"
                 placeholder="Sua cidade"
@@ -154,10 +171,11 @@ const SignUpAddress = () => {
             </FormControl>
 
             <FormControl mt="10px">
-              <FormLabel>Estado</FormLabel>
+              <FormLabel color="white">Estado</FormLabel>
               <Input
                 padding="10px"
                 w="100%"
+                bg="white"
                 maxW="370px"
                 type="name"
                 placeholder="Seu estado"
@@ -167,11 +185,12 @@ const SignUpAddress = () => {
             </FormControl>
 
             <FormControl mt="10px">
-              <FormLabel>Complemento</FormLabel>
+              <FormLabel color="white">Complemento</FormLabel>
               <Input
                 padding="10px"
                 w="100%"
                 maxW="370px"
+                bg="white"
                 type="name"
                 placeholder="Digite o complemento"
                 value={complement}

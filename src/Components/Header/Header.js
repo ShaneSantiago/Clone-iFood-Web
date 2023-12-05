@@ -20,7 +20,7 @@ import { useResults } from "../Context/GlobalContext";
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isMobile, setIsMobile] = useState(false);
-  const { token, setToken } = useResults();
+  const { token, setToken, cart } = useResults();
 
   const navigate = useNavigate();
 
@@ -53,9 +53,12 @@ const Header = () => {
       as="header"
       alignItems="center"
       justifyContent="space-between"
-      bg="#5CB646"
+      background="linear-gradient(to right, red, #ff8c00)"
       p={4}
       color="white"
+      position="fixed" // Torna o header fixo
+      width="100%" // Faz o cabeçalho ocupar toda a largura da tela
+      zIndex="999"
     >
       <Box>
         <Text fontSize="2xl">Logo</Text>
@@ -88,6 +91,18 @@ const Header = () => {
             onClick={(e) => navigate("/pagamento")}
           >
             Carrinho
+            {cart.length >= 1 ? (
+              <Text
+                marginBottom="10px"
+                backgroundColor="red"
+                width="20px"
+                height="20px"
+                borderRadius="50px"
+                marginLeft="2px"
+              >
+                {cart.length}
+              </Text>
+            ) : null}
           </Button>
 
           <Button

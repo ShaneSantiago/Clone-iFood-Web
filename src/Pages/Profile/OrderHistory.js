@@ -52,8 +52,7 @@ const OrderHistory = () => {
 
   return (
     <>
-      <Box>
-        <Text m="10px">Detalhes dos pedidos realizados</Text>
+      <Box display="flex" flexWrap="wrap" justifyContent="center">
         {history.map((item) => {
           const formattedDate = formatTimestamp(item.createdAt);
           return (

@@ -71,7 +71,7 @@ const Login = () => {
   };
   return (
     <>
-      <Flex height="100vh">
+      <Flex height="100vh" background="linear-gradient(to right, red, #ff8c00)">
         <Box
           flex="1"
           display="flex"
@@ -80,32 +80,35 @@ const Login = () => {
           m="20px"
         >
           <Box margin="0 auto" w="100%" maxW="370px" mt="20px">
-            <Text textAlign="center" fontSize="40px" mb="50px">
+            <Text textAlign="center" fontSize="40px" mb="50px" color="white">
               Future{" "}
               <Text as="span" fontWeight="bold" color="#5CB646">
                 Eats
               </Text>
             </Text>
             <FormControl mt="20px">
-              <FormLabel>E-mail</FormLabel>
+              <FormLabel color="white">E-mail</FormLabel>
               <Input
                 padding="10px"
                 maxW="370px"
                 type="text"
                 placeholder="Digite seu e-mail"
-                border="none"
+                border="2px solid #fff"
+                bg="white"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </FormControl>
 
             <FormControl mt="20px">
-              <FormLabel>Senha</FormLabel>
+              <FormLabel color="white">Senha</FormLabel>
               <Input
                 padding="10px"
                 w="100%"
                 maxW="370px"
                 type="password"
+                border="2px solid #fff"
+                bg="white"
                 placeholder="Digite sua senha"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -117,16 +120,16 @@ const Login = () => {
             <Button
               isLoading={loading}
               loadingText="Fazendo login"
-              variant="outline"
               spinnerPlacement="start"
               onClick={onSubmit}
               w="100%"
               bg="#5CB646"
+              colorScheme="#5CB646"
             >
               Entrar
             </Button>
             <Box mt="20px">
-              <Link onClick={() => navigate("/cadastro")}>
+              <Link onClick={() => navigate("/cadastro")} color="white">
                 Não tem cadastro? Cadastre-se agora
               </Link>
             </Box>

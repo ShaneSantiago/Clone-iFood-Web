@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Alert,
   Box,
@@ -13,11 +15,9 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import { useResults } from "../../Components/Context/GlobalContext";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { BASE_URL } from "../../Constants/url";
+import { useResults } from "../../Components/Context/GlobalContext";
 import UseProtectedPage from "../../Components/Hooks/useProtectedPage";
 
 const Cart = () => {
@@ -25,47 +25,45 @@ const Cart = () => {
   const { cart, setCart } = useResults();
   const [checkBox, setCheckBox] = useState(false);
   const [checkBoxCredit, setCheckBoxCredit] = useState(false);
-  const [orderErro, setOrderErro] = useState([]);
+  const [orderError, setOrderError] = useState([]);
   const [loading, setLoading] = useState(false);
   const [payment, setPayment] = useState("creditcard");
   const toast = useToast();
 
+  const navigate = useNavigate();
+
   const params = useParams();
 
+  // Calculate total and freight
   let total = 0;
-  let frete = cart.map((item) => {
-    return item.freight;
-  });
-
-  const listaItens = cart?.map((item) => {
+  let freight = cart.map((item) => item.freight);
+  const itemList = cart?.map((item) => {
     const subtotal = item.quantity * item.price;
     total += subtotal;
   });
+  const totalItems = total + freight[0];
 
-  const totalItems = total + frete[0];
-
+  // Increase quantity of an item
   const incrementQuantity = (itemId) => {
-    const updatedCart = cart.map((item) => {
-      if (item.id === itemId) {
-        return { ...item, quantity: item.quantity + 1 };
-      }
-      return item;
-    });
+    const updatedCart = cart.map((item) =>
+      item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
+    );
     setCart(updatedCart);
   };
 
+  // Decrease quantity of an item
   const decrementQuantity = (itemId) => {
-    const updatedCart = cart.map((item) => {
-      if (item.id === itemId && item.quantity > 0) {
-        return { ...item, quantity: item.quantity - 1 };
-      }
-      return item;
-    });
+    const updatedCart = cart.map((item) =>
+      item.id === itemId && item.quantity > 0
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
+    );
     setCart(updatedCart);
   };
 
+  // Handle order submission
   const submitOrder = () => {
-    if (checkBox === false && checkBoxCredit === false) {
+    if (!checkBox && !checkBoxCredit) {
       toast({
         title: "Ops",
         description:
@@ -79,6 +77,7 @@ const Cart = () => {
     }
   };
 
+  // Send order request
   const order = () => {
     const restaurantIds = [...new Set(cart.map((item) => item.idRestaurant))];
 
@@ -112,6 +111,8 @@ const Cart = () => {
             duration: 9000,
             isClosable: true,
           });
+          setCart("");
+          navigate("/feed");
         })
         .catch((error) => {
           if (error.response && error.response.status === 409) {
@@ -135,6 +136,7 @@ const Cart = () => {
     });
   };
 
+  // Fetch active order on component mount
   useEffect(() => {
     setLoading(true);
     const headers = {
@@ -143,24 +145,25 @@ const Cart = () => {
         "Content-Type": "application/json",
       },
     };
+
     axios
       .get(`${BASE_URL}/active-order`, headers)
       .then((res) => {
-        setOrderErro(res.data);
-        // console.log("Sucesso", res.data);
+        setOrderError(res.data);
         setLoading(false);
       })
-      .catch((erro) => {
-        console.log("Erro");
+      .catch((error) => {
+        console.log("Error fetching active order");
       });
   }, []);
 
+  // Format order creation and expiration dates
   let createdAtFormatted = "";
   let expiresAtFormatted = "";
 
-  if (orderErro.order) {
-    const createdAtTimestamp = orderErro.order.createdAt;
-    const expiresAtTimestamp = orderErro.order.expiresAt;
+  if (orderError.order) {
+    const createdAtTimestamp = orderError.order.createdAt;
+    const expiresAtTimestamp = orderError.order.expiresAt;
 
     if (createdAtTimestamp && expiresAtTimestamp) {
       const createdAtDate = new Date(createdAtTimestamp);
@@ -171,153 +174,190 @@ const Cart = () => {
     }
   }
 
+  console.log("Dinheiro", checkBox);
+  console.log("Credito", checkBoxCredit);
+
   return (
     <>
-      <Box padding="20px">
-        <Flex w={{ base: "100%", lg: "70%" }} m="0 auto" flexDirection="column">
-          <Text fontWeight="500" fontSize="35px">
-            Faça seu pagamento para concluir seu pedido no
-            <span style={{ color: "#5CB646" }}> Future Eats</span>
-          </Text>
-        </Flex>
-      </Box>
-      <Box display="flex" flexDirection={{ base: "column", lg: "row" }}>
+      <Box height="100vh" background="linear-gradient(to right, red, #ff8c00)">
+        <Box
+          padding="20px"
+          background="linear-gradient(to right, red, #ff8c00)"
+        >
+          <Flex
+            w={{ base: "100%", lg: "70%" }}
+            m="0 auto"
+            flexDirection="column"
+            marginTop="90px"
+          >
+            <Text fontWeight="500" fontSize="35px" mb="10px" color="white">
+              Faça seu pagamento para concluir seu pedido no
+              <span style={{ color: "#5CB646" }}> Future Eats</span>
+            </Text>
+          </Flex>
+        </Box>
+
         <Box
           display="flex"
-          flexWrap="wrap"
-          justifyContent="space-between"
-          w={{ base: "100%", lg: "70%" }}
+          flexDirection={{ base: "column", lg: "row" }}
+          background="linear-gradient(to right, red, #ff8c00)"
         >
-          {cart.map((item) => {
-            return (
-              <Card key={item.id} m="15px" h="400px">
+          <Box
+            display="flex"
+            flexWrap="wrap"
+            justifyContent="space-between"
+            w={{ base: "100%", lg: "70%" }}
+            height="100%"
+          >
+            {cart.map((item) => (
+              <Card
+                margin="20px"
+                key={item.id}
+                border="1px solid #CCC"
+                bg="transparent"
+                borderRadius="20px"
+                overflow="hidden"
+                boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)"
+                transition="transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out"
+                _hover={{
+                  transform: "scale(1.05)",
+                  boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+                }}
+              >
                 <Image
                   src={item.photoUrl}
                   alt="produtos"
                   w="350px"
                   h="200px"
-                  border="1px solid #CCC"
                   mb="10px"
                 />
 
-                <Box mt="10px">
-                  <Text color="#5CB646" fontSize="18px">
-                    {" "}
+                <Box mt="10px" padding="10px">
+                  <Text color="white" fontWeight="bold" fontSize="18px">
                     {item.name}
                   </Text>
-                  <Text>{item.description}</Text>
-                  <Text fontSize="20px">
-                    R${item.price.toFixed(2).replace(".", ",")}
+                  <Divider mt="10px" mb="10px" />
+                  <Text color="white">{item.description}</Text>
+                  <Text color="white" fontSize="20px">
+                    R$ {item.price.toFixed(2).replace(".", ",")}
                   </Text>
 
                   <Box display="flex" flexWrap="wrap" mt="10px">
-                    {cart.map((quant) => {
-                      return (
-                        <Box
-                          key={quant.id}
-                          display="flex"
-                          alignItems="center"
-                          justifyContent="space-between"
-                          w="100%"
-                        >
-                          {quant.id === item.id ? (
-                            <>
-                              <Box
-                                display="flex"
-                                alignItems="center"
-                                justifyContent="space-between"
-                                w="100%"
+                    {cart.map((quant) => (
+                      <Box
+                        key={quant.id}
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="space-between"
+                        w="100%"
+                      >
+                        {quant.id === item.id && (
+                          <>
+                            <Box
+                              display="flex"
+                              alignItems="center"
+                              justifyContent="space-between"
+                              w="100%"
+                            >
+                              <Button
+                                bg="red"
+                                border="2px solid #fff"
+                                color="white"
+                                onClick={() => decrementQuantity(quant.id)}
                               >
-                                <Button
-                                  bg="red"
-                                  color="white"
-                                  onClick={() => decrementQuantity(quant.id)}
-                                >
-                                  -
-                                </Button>
-                                <Text ml="10px" marginRight="10px">
-                                  Quantidade:
-                                </Text>
-                                <Text
-                                  m="10px"
-                                  color="#5CB646"
-                                  textAlign="center"
-                                >
-                                  {" "}
-                                  {quant.quantity}
-                                </Text>
-
-                                <Button
-                                  bg="green"
-                                  color="white"
-                                  onClick={() => incrementQuantity(quant.id)}
-                                >
-                                  +
-                                </Button>
-                              </Box>
-                            </>
-                          ) : null}
-                        </Box>
-                      );
-                    })}
+                                -
+                              </Button>
+                              <Text ml="10px" marginRight="10px" color="white">
+                                Quantidade:
+                              </Text>
+                              <Text m="10px" color="white" textAlign="center">
+                                {quant.quantity}
+                              </Text>
+                              <Button
+                                bg="green"
+                                color="white"
+                                onClick={() => incrementQuantity(quant.id)}
+                              >
+                                +
+                              </Button>
+                            </Box>
+                          </>
+                        )}
+                      </Box>
+                    ))}
                   </Box>
                 </Box>
               </Card>
-            );
-          })}
-        </Box>
+            ))}
+          </Box>
 
-        <Box w={{ base: "100%", lg: "30%" }} h="100vh" m="20px">
-          <Text fontSize="25px" textAlign="center" mb="20px">
-            Pagamento
-          </Text>
-          {cart.length < 1 ? (
-            <>
+          {/* Order Summary Section */}
+          <Box
+            w={{ base: "100%", lg: "30%" }}
+            h="100%"
+            m="20px"
+            border="1px solid #fff"
+            padding="10px"
+          >
+            <Text fontSize="25px" textAlign="center" mb="20px" color="white">
+              Pagamento
+            </Text>
+
+            {/* Cart Summary */}
+            {cart.length < 1 ? (
               <Text>Nenhum produto foi adicionado</Text>
-            </>
-          ) : (
-            <>
-              <Text>
-                Frete: R${Number(frete[0]).toFixed(2).replace(".", ",")}
+            ) : (
+              <>
+                <Text color="white">
+                  Frete: R${Number(freight[0]).toFixed(2).replace(".", ",")}
+                </Text>
+                <Text color="white">
+                  Subtotal: R${total.toFixed(2).replace(".", ",")}
+                </Text>
+                <Text color="white">
+                  Total: R${totalItems.toFixed(2).replace(".", ",")}
+                </Text>
+              </>
+            )}
+
+            {/* Payment Options */}
+            <Box mt="20px">
+              <Text fontWeight="500" color="white">
+                Forma de pagamento
               </Text>
-              <Text>Subtotal: R${total.toFixed(2).replace(".", ",")}</Text>
-              <Text>Total: R${totalItems.toFixed(2).replace(".", ",")}</Text>
-            </>
-          )}
-          <Box mt="20px">
-            <Text fontWeight="500">Forma de pagamento</Text>
-            <Divider />
-          </Box>
-          <Box mt="10px">
-            <FormLabel display="flex" alignItems="center">
-              <Checkbox
-                checked={checkBox}
-                isDisabled={checkBoxCredit === true}
-                onChange={() => setCheckBox(!checkBox)}
-              />
-              Dinheiro
-            </FormLabel>
-            <FormLabel display="flex" alignItems="center">
-              <Checkbox
-                checked={checkBoxCredit}
-                isDisabled={checkBox === true}
-                onChange={() => setCheckBoxCredit(!checkBoxCredit)}
-              />
-              Cartão de Crédito
-            </FormLabel>
-          </Box>
+              <Divider />
+            </Box>
+            <Box mt="10px">
+              <FormLabel display="flex" alignItems="center" color="white">
+                <Checkbox
+                  checked={checkBox}
+                  isDisabled={checkBoxCredit}
+                  onChange={() => setCheckBox(!checkBox)}
+                />
+                Dinheiro
+              </FormLabel>
+              <FormLabel display="flex" alignItems="center" color="white">
+                <Checkbox
+                  checked={checkBoxCredit}
+                  isDisabled={checkBox}
+                  onChange={() => setCheckBoxCredit(!checkBoxCredit)}
+                />
+                Cartão de Crédito
+              </FormLabel>
+            </Box>
 
-          <Box w="100%" mt="20px">
-            <Button onClick={submitOrder} bg="#5CB646" w="100%" color="white">
-              Confirmar
-            </Button>
-          </Box>
+            {/* Submit Order Button */}
+            <Box w="100%" mt="20px">
+              <Button onClick={submitOrder} w="100%" bg="#5CB646" color="white">
+                Confirmar
+              </Button>
+            </Box>
 
-          {orderErro.order ? (
-            <>
+            {/* Order Details Section */}
+            {orderError.order && (
               <Alert display="flex" flexDirection="column" mt="10px">
                 <Box>
-                  <Text>Restaurante: {orderErro.order?.restaurantName}</Text>
+                  <Text>Restaurante: {orderError.order?.restaurantName}</Text>
                   <Divider />
                   <Text>Pedido criado em: {createdAtFormatted}</Text>
                   <Divider />
@@ -329,11 +369,12 @@ const Cart = () => {
                   </Text>
                 </Box>
               </Alert>
-            </>
-          ) : null}
+            )}
+          </Box>
         </Box>
       </Box>
     </>
   );
 };
+
 export default Cart;

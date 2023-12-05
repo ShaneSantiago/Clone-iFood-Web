@@ -96,25 +96,29 @@ const Profile = () => {
 
   return (
     <>
-      <Box>
-        <Box padding="20px">
+      <Box
+        background="linear-gradient(to right, red, #ff8c00)"
+        minHeight="100vh"
+      >
+        <Box
+          padding="20px"
+          background="linear-gradient(to right, red, #ff8c00)"
+        >
           <Flex
             w={{ base: "100%", lg: "70%" }}
             m="0 auto"
             flexDirection="column"
+            marginTop="70px"
           >
-            <Text fontWeight="500" fontSize="50px" textAlign="center">
+            <Text
+              fontWeight="500"
+              fontSize="50px"
+              textAlign="center"
+              color="white"
+            >
               Perfil do usuário
               <span style={{ color: "#5CB646" }}> Future Eats</span>
             </Text>
-
-            <Box
-              w="100%"
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              mt="30px"
-            ></Box>
           </Flex>
         </Box>
 
@@ -124,14 +128,20 @@ const Profile = () => {
           flexDirection={{ base: "column", lg: "row" }}
         >
           <Box>
-            <Text m="10px">Detalhes do Perfil</Text>
+            <Text m="10px" color="white" fontWeight="bold">
+              Detalhes do Perfil
+            </Text>
             <EditUser />
             <EditAddress />
           </Box>
-          <Box>
-            <OrderHistory />
-          </Box>
         </Flex>
+
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <Text m="10px" color="white" fontWeight="bold">
+            Detalhes dos pedidos realizados
+          </Text>
+          <OrderHistory />
+        </Box>
       </Box>
     </>
   );

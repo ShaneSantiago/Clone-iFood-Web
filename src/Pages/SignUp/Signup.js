@@ -3,6 +3,7 @@ import {
   Button,
   Flex,
   FormControl,
+  FormHelperText,
   FormLabel,
   Image,
   Input,
@@ -30,6 +31,42 @@ const SignUp = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    if (!email || !name || !cpf || !password) {
+      toast({
+        title: "Erro",
+        description: "Preencha todos os campos obrigatórios.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    // Validação do formato do e-mail
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast({
+        title: "Erro",
+        description: "Digite um e-mail válido.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    // Validação do CPF (neste exemplo, apenas verifica se tem 11 dígitos)
+    if (cpf.length !== 11) {
+      toast({
+        title: "Erro",
+        description: "Digite um CPF válido.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
     signup();
   };
 
@@ -80,7 +117,7 @@ const SignUp = () => {
   };
   return (
     <>
-      <Flex height="100vh">
+      <Flex height="100vh" background="linear-gradient(to right, red, #ff8c00)">
         <Box flex="1" bg="red" display={{ base: "none", lg: "block" }}>
           <Image
             src={future}
@@ -99,32 +136,37 @@ const SignUp = () => {
           mb="30px"
         >
           <Box margin="0 auto" w="100%" maxW="370px" mt="20px">
-            <Text textAlign="center" fontSize="40px" mb="50px">
+            <Text textAlign="center" fontSize="40px" mb="50px" color="white">
               Future{" "}
               <Text as="span" fontWeight="bold" color="#5CB646">
                 Eats
               </Text>
             </Text>
-            <Text mb="20px">Cadastre-se</Text>
+            <Text mb="20px" color="white">
+              Cadastre-se
+            </Text>
             <FormControl mt="20px">
-              <FormLabel>E-mail</FormLabel>
+              <FormLabel color="white">E-mail</FormLabel>
               <Input
                 padding="10px"
                 maxW="370px"
                 type="text"
+                bg="white"
                 placeholder="Digite seu e-mail"
                 border="none"
                 value={email}
+                isRequired
                 onChange={(e) => setEmail(e.target.value)}
               />
             </FormControl>
 
             <FormControl mt="20px">
-              <FormLabel>Nome</FormLabel>
+              <FormLabel color="white">Nome</FormLabel>
               <Input
                 padding="10px"
                 w="100%"
                 maxW="370px"
+                bg="white"
                 type="name"
                 placeholder="Digite seu nome"
                 value={name}
@@ -133,11 +175,12 @@ const SignUp = () => {
             </FormControl>
 
             <FormControl mt="20px">
-              <FormLabel>CPF</FormLabel>
+              <FormLabel color="white">CPF</FormLabel>
               <Input
                 padding="10px"
                 w="100%"
                 maxW="370px"
+                bg="white"
                 type="number"
                 placeholder="Digite seu CPF sem traços ou pontos"
                 value={cpf}
@@ -146,11 +189,12 @@ const SignUp = () => {
             </FormControl>
 
             <FormControl mt="20px">
-              <FormLabel>Senha</FormLabel>
+              <FormLabel color="white">Senha</FormLabel>
               <Input
                 padding="10px"
                 w="100%"
                 maxW="370px"
+                bg="white"
                 type="password"
                 placeholder="Digite sua senha"
                 value={password}
@@ -163,7 +207,7 @@ const SignUp = () => {
             <Button
               isLoading={loading}
               loadingText="Realizando cadastro"
-              variant="outline"
+              color="white"
               spinnerPlacement="start"
               onClick={onSubmit}
               w="100%"
@@ -172,7 +216,7 @@ const SignUp = () => {
               Cadastrar
             </Button>
             <Box mt="20px">
-              <Link onClick={() => navigate("/")}>
+              <Link onClick={() => navigate("/")} color="white">
                 Já possui cadastro? Faça Login
               </Link>
             </Box>

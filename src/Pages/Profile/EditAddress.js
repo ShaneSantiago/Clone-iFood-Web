@@ -89,13 +89,15 @@ const EditAddress = (props) => {
       <Box
         w={{ base: "100%", lg: "350px" }}
         m="10px auto"
-        border="1px solid #ccc"
+        border="1px solid #fff"
         padding="20px"
         borderRadius="8px"
       >
         {isEditingAddress ? (
           <>
-            <Text mb="10px">Edição de Endereço</Text>
+            <Text mb="10px" color="white">
+              Edição de Endereço
+            </Text>
             <Input
               placeholder="Cidade"
               value={newCity}
@@ -145,26 +147,26 @@ const EditAddress = (props) => {
           <>
             <Flex display="flex" justifyContent="space-between">
               <Box>
-                <Text fontSize="24px" fontWeight="bold">
+                <Text fontSize="24px" fontWeight="bold" color="white">
                   Endereço Completo
                 </Text>
-                <Text fontSize="16px" color="gray.500">
+                <Text fontSize="16px" color="white">
                   Cidade: {fullAddress.city}
                 </Text>
 
-                <Text fontSize="16px" color="gray.500">
+                <Text fontSize="16px" color="white">
                   Bairro: {fullAddress.neighbourhood}
                 </Text>
 
-                <Text fontSize="16px" color="gray.500">
+                <Text fontSize="16px" color="white">
                   Estado: {fullAddress.state}
                 </Text>
 
-                <Text fontSize="16px" color="gray.500">
+                <Text fontSize="16px" color="white">
                   Rua: {fullAddress.street}
                 </Text>
 
-                <Text fontSize="16px" color="gray.500">
+                <Text fontSize="16px" color="white">
                   Número: {fullAddress.number}
                 </Text>
               </Box>

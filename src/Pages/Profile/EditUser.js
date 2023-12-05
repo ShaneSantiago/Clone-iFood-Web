@@ -97,13 +97,15 @@ const EditUser = () => {
         <Box
           w={{ base: "100%", lg: "350px" }}
           m="0 auto"
-          border="1px solid #ccc"
+          border="1px solid #fff"
           padding="20px"
           borderRadius="8px"
         >
           {isEditing ? (
             <>
-              <Text mb="10px">Edição de dados</Text>
+              <Text mb="10px" color="white">
+                Edição de dados
+              </Text>
               <Input
                 placeholder="Nome"
                 value={name}
@@ -135,17 +137,17 @@ const EditUser = () => {
             <>
               <Flex display="flex" justifyContent="space-between">
                 <Box>
-                  <Text fontSize="24px" fontWeight="bold">
+                  <Text fontSize="24px" fontWeight="bold" color="white">
                     {user.name}
                   </Text>
-                  <Text fontSize="16px" color="gray.500">
+                  <Text fontSize="16px" color="white">
                     CPF: {user.cpf}
                   </Text>
-                  <Text fontSize="16px" color="gray.500">
+                  <Text fontSize="16px" color="white">
                     Email: {user.email}
                   </Text>
                   {user.hasAddress && (
-                    <Text fontSize="16px" color="gray.500">
+                    <Text fontSize="16px" color="white">
                       Endereço: {user.address}
                     </Text>
                   )}
