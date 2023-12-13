@@ -9,7 +9,6 @@
 <h2 id="sobre">:notebook: Sobre </h2>
 <p align="justify">No projeto desenvolvi uma aplicação web baseada em um aplicativo de delivery de comida onde o design foi desenvolvido pela designer Camila Mizutani e utilizamos uma API própria contendo todas as funções necessárias.</p>
 
-
 <!-- PROJECT SITE -->
 <h2 id="site">:earth_americas: Link do site </h2>
 <p>🔗 <a href="https://chilly-battle.surge.sh/" target="_blank"> Future Eats </a>  </p>
